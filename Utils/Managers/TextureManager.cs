@@ -2,12 +2,12 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
 
-namespace Core.Managers;
+namespace Utils.Managers;
 
 public static class TextureManager
 {
     private static ContentManager _Content;
-    internal static void SetContent(ContentManager pContent)
+    public static void SetContent(ContentManager pContent)
     {
         _Content = pContent;
     }

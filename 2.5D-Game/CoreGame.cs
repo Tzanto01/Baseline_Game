@@ -1,8 +1,9 @@
 ﻿using Core.Handlers;
-using Core.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
+using Utils.Managers;
 
 namespace Core
 {
@@ -26,6 +27,11 @@ namespace Core
             _loadContentHandler = new LoadContentHandler();
 
             TextureManager.SetContent(Content);
+            bool success = GameManager.SetGameType("tetris");
+            if (!success)
+            {
+                Environment.Exit(0);
+            }
         }
 
         protected override void Initialize()

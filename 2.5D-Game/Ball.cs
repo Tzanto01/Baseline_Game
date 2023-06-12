@@ -1,8 +1,8 @@
 ﻿using Core.Interfaces;
-using Core.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Drawing;
+using Utils.Managers;
 using Color = Microsoft.Xna.Framework.Color;
 
 namespace Core;
