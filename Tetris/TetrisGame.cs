@@ -1,16 +1,17 @@
-﻿using System;
-using System.Reflection;
+﻿using Utils.GameObjects;
 using Utils.Interfaces;
 
-namespace Tetris
-{
-    public class TetrisGame : IGame
-    {
-        public Guid Id { get; }
+namespace Tetris;
 
-        public TetrisGame()
-        {
-            var assembly = Assembly.GetAssembly(typeof(TetrisGame));
-        }
+public class TetrisGame : IGame
+{
+    public TetrisGame()
+    {
+        Initizalize();
+    }
+
+    public void Initizalize()
+    {
+        var ball = new Ball();
     }
 }

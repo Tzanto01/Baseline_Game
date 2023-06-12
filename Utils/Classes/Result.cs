@@ -20,8 +20,17 @@
         public static bool operator true(Result<T> val) => val.Success;
         public static bool operator false(Result<T> val) => !val.Success;
         public static bool operator !(Result<T> val) => !val.Success;
-
         public static bool operator ==(Result<T> val, bool pBool) => val.Success == pBool;
         public static bool operator !=(Result<T> val, bool pBool) => val.Success != pBool;
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace Core.Interfaces;
+namespace Utils.Interfaces;
 
 public interface IUpdate
 {

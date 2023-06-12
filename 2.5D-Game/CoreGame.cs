@@ -1,8 +1,8 @@
-﻿using Core.Handlers;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
+using Tetris;
+using Utils.Handlers;
 using Utils.Managers;
 
 namespace Core
@@ -26,18 +26,15 @@ namespace Core
             _drawHandler = new DrawHandler();
             _loadContentHandler = new LoadContentHandler();
 
+            GraphicsManager.SetGraphics(_graphics);
             TextureManager.SetContent(Content);
-            bool success = GameManager.SetGameType("tetris");
-            if (!success)
-            {
-                Environment.Exit(0);
-            }
+            GameManager.SetGameType(typeof(TetrisGame));
         }
 
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            var ball = new Ball();
+            var game = GameManager.InitializeCurrentGame();
             base.Initialize();
         }
 
@@ -59,7 +56,7 @@ namespace Core
 
         protected override void Draw(GameTime pGameTime)
         {
-            _graphics.GraphicsDevice.Clear(Color.Black);
+            _graphics.GraphicsDevice.Clear(Color.White);
 
             _spriteBatch.Begin();
             _drawHandler.Handle(pGameTime, _spriteBatch);

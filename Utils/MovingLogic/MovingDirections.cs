@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Core.KeyBoard;
+namespace Utils.MovingLogic;
 
 [Flags]
 public enum MovingDirection

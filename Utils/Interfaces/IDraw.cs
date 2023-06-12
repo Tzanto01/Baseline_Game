@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Core.Interfaces;
+namespace Utils.Interfaces;
 
 public interface IDraw
 {

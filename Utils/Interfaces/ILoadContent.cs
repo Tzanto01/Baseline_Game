@@ -1,4 +1,4 @@
-﻿namespace Core.Interfaces;
+﻿namespace Utils.Interfaces;
 
 public interface ILoadContent
 {
