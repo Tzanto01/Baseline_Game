@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Messages>
+	<Message key="test">
+		<ger>Dies ist ein Test</ger>
+		<eng>This is a test</eng>
+		<fre>Il s'agit d'un test</fre>
+	</Message>
+	<Message key="testformatted">
+		<ger>Dies ist ein Test {0}</ger>
+		<eng>This is a test {0}</eng>
+		<fre>Il s'agit d'un test {0}</fre>
+	</Message>
+</Messages>

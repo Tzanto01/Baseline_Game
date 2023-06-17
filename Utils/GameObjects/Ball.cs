@@ -2,11 +2,10 @@
 using Microsoft.Xna.Framework.Graphics;
 using System.Drawing;
 using Utils.Interfaces;
-using Color = Microsoft.Xna.Framework.Color;
 
 namespace Utils.GameObjects;
 
-public class Ball : GameObject<Texture2D>, ILoadDrawAndUpdate
+public class Ball : GameObject, ILoadDrawAndUpdate
 {
     public Ball() : base()
     {
@@ -21,7 +20,7 @@ public class Ball : GameObject<Texture2D>, ILoadDrawAndUpdate
 
     public void LoadContent()
     {
-        BaseTexture = LoadTexture<Texture2D>("ball");
+        BaseTexture = LoadTexture("ball");
     }
 
     public void Update(GameTime pGameTime)

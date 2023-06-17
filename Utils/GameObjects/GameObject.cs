@@ -7,16 +7,17 @@ using Utils.MovingLogic;
 
 namespace Utils.GameObjects;
 
-public class GameObject<T> where T : Texture
+public class GameObject
 {
     public Vector2 Position;
     public float Speed;
     public MovingHelper MovingHelper;
-    public T BaseTexture { get; set; }
+    public Texture2D BaseTexture;
     public GraphicsDeviceManager Graphics
     {
         get => GraphicsManager.GetGraphics();
     }
+    public float ObjectScale { get; set; }
 
     public GameObject()
     {
@@ -35,8 +36,13 @@ public class GameObject<T> where T : Texture
         Position = new Vector2(Graphics.PreferredBackBufferWidth / 2, Graphics.PreferredBackBufferHeight / 2);
     }
 
-    public T LoadTexture<T>(string pTextureName) where T : Texture
+    public Texture2D LoadTexture(string pTextureName)
     {
-        return TextureManager.LoadTexture<T>(pTextureName);
+        return TextureManager.LoadTexture<Texture2D>(pTextureName);
+    }
+
+    public void DrawCentered(SpriteBatch pSpriteBatch)
+    {
+        pSpriteBatch.DrawCentered(BaseTexture, Position, Color.White);
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using Tetris;
 using Utils.Handlers;
 using Utils.Managers;
+using Utils.Readers;
 
 namespace Core
 {
@@ -29,6 +30,8 @@ namespace Core
             GraphicsManager.SetGraphics(_graphics);
             TextureManager.SetContent(Content);
             GameManager.SetGameType(typeof(TetrisGame));
+
+            Localization.LoadLocalization();
         }
 
         protected override void Initialize()

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Utils.Classes;
-using Utils.Structs;
 
 namespace Utils.Readers
 {
@@ -80,5 +79,12 @@ namespace Utils.Readers
 
             return new Result<IEnumerable<ConfigEntry>>(true, allEntries);
         }
+    }
+
+    public struct ConfigEntry
+    {
+        public string ID;
+        public object Value;
+        public string OriginalFile;
     }
 }

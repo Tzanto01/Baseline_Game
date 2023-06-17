@@ -12,6 +12,6 @@ public class TetrisGame : IGame
 
     public void Initizalize()
     {
-        var ball = new Ball();
+        var rectangle = new Rectangle();
     }
 }

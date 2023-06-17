@@ -1,10 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System.Drawing;
 using Utils.Interfaces;
 
 namespace Utils.GameObjects;
 
-public class Rectangle : GameObject<Texture2D>, ILoadDrawAndUpdate
+public class Rectangle : GameObject, ILoadDrawAndUpdate
 {
     public Rectangle() : base()
     {
@@ -13,16 +14,17 @@ public class Rectangle : GameObject<Texture2D>, ILoadDrawAndUpdate
 
     public void LoadContent()
     {
-        // Create Rectangle Content
-        BaseTexture = LoadTexture<Texture2D>("");
+        BaseTexture = LoadTexture("rectangle");
+        ObjectScale = 0.5f;
     }
 
     public void Update(GameTime pGameTime)
     {
-        throw new System.NotImplementedException();
+        MovingHelper.Move(this, pGameTime, pParentSize: new Size(Graphics.PreferredBackBufferWidth, Graphics.PreferredBackBufferHeight));
     }
     public void Draw(GameTime pGameTime, SpriteBatch pSpriteBatch)
     {
-        throw new System.NotImplementedException();
+        DrawCentered(pSpriteBatch);
+        pSpriteBatch.DrawCentered(BaseTexture, Position, Color.White);
     }
 }

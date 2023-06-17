@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Drawing;
 using Utils.GameObjects;
@@ -10,7 +9,7 @@ public class MovingHelper
 {
     public bool ConfineToParentBounds { get; set; } = true;
     // ToDo: Implement Parent-Size
-    public void Move<T>(GameObject<T> pObject, GameTime pGameTime, MovingDirection pDirection = MovingDirection.All, float pObjectSpeed = float.NaN, Size pParentSize = new Size()) where T : Texture
+    public void Move(GameObject pObject, GameTime pGameTime, MovingDirection pDirection = MovingDirection.All, float pObjectSpeed = float.NaN, Size pParentSize = new Size())
     {
         if (pDirection == MovingDirection.None)
             return;
@@ -32,12 +31,10 @@ public class MovingHelper
         if (kstate.IsKeyDown(Keys.Right) && (canMoveAll || (pDirection & MovingDirection.Right) == MovingDirection.Right))
             pObject.Position.X += speed * (float)pGameTime.ElapsedGameTime.TotalSeconds;
 
-
-
         CheckParentSize(pObject, size);
     }
 
-    public void MoveInstant<T>(GameObject<T> pObject, float pMovingDistance, MovingDirection pDirection = MovingDirection.All, Size pParentSize = new Size()) where T : Texture
+    public void MoveInstant(GameObject pObject, float pMovingDistance, MovingDirection pDirection = MovingDirection.All, Size pParentSize = new Size())
     {
         if (pDirection == MovingDirection.None)
             return;
@@ -61,19 +58,19 @@ public class MovingHelper
         CheckParentSize(pObject, size);
     }
 
-    private void CheckParentSize<T>(GameObject<T> pObject, Size size) where T : Texture
+    private void CheckParentSize(GameObject pObject, Size size)
     {
-        if (!ConfineToParentBounds || pObject is not GameObject<Texture2D> object2D || size == default)
+        if (!ConfineToParentBounds || size == default)
             return;
 
-        if (pObject.Position.X > size.Width - object2D.BaseTexture.Width / 2)
-            pObject.Position.X = size.Width - object2D.BaseTexture.Width / 2;
-        else if (pObject.Position.X < object2D.BaseTexture.Width / 2)
-            pObject.Position.X = object2D.BaseTexture.Width / 2;
+        if (pObject.Position.X > size.Width - pObject.BaseTexture.Width / 2)
+            pObject.Position.X = size.Width - pObject.BaseTexture.Width / 2;
+        else if (pObject.Position.X < pObject.BaseTexture.Width / 2)
+            pObject.Position.X = pObject.BaseTexture.Width / 2;
 
-        if (pObject.Position.Y > size.Height - object2D.BaseTexture.Height / 2)
-            pObject.Position.Y = size.Height - object2D.BaseTexture.Height / 2;
-        else if (pObject.Position.Y < object2D.BaseTexture.Height / 2)
-            pObject.Position.Y = object2D.BaseTexture.Height / 2;
+        if (pObject.Position.Y > size.Height - pObject.BaseTexture.Height / 2)
+            pObject.Position.Y = size.Height - pObject.BaseTexture.Height / 2;
+        else if (pObject.Position.Y < pObject.BaseTexture.Height / 2)
+            pObject.Position.Y = pObject.BaseTexture.Height / 2;
     }
 }
