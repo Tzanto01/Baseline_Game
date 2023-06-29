@@ -9,15 +9,25 @@ namespace Utils.GameObjects;
 
 public class GameObject
 {
-    public Vector2 Position;
-    public float Speed;
+    public Vector2 Position = Vector2.Zero;
+    public Vector2 Origin = Vector2.Zero;
+    public float Speed = 0;
+    public float Size = 1;
+    public Microsoft.Xna.Framework.Rectangle? Source;
+    public Color Color = Color.White;
+    public float Rotation = 0;
+    public SpriteEffects Effects = SpriteEffects.None;
+    public float Layer = 0;
+
+    public float Height => BaseTexture.Height * Size;
+    public float Width => BaseTexture.Width * Size;
+
     public MovingHelper MovingHelper;
     public Texture2D BaseTexture;
-    public GraphicsDeviceManager Graphics
+    public static GraphicsDeviceManager Graphics
     {
         get => GraphicsManager.GetGraphics();
     }
-    public float ObjectScale { get; set; }
 
     public GameObject()
     {
@@ -34,15 +44,16 @@ public class GameObject
     public void SetCentered()
     {
         Position = new Vector2(Graphics.PreferredBackBufferWidth / 2, Graphics.PreferredBackBufferHeight / 2);
+        Origin = new Vector2(BaseTexture.Width / 2, BaseTexture.Height / 2);
     }
 
-    public Texture2D LoadTexture(string pTextureName)
+    public static Texture2D LoadTexture(string pTextureName)
     {
         return TextureManager.LoadTexture<Texture2D>(pTextureName);
     }
 
-    public void DrawCentered(SpriteBatch pSpriteBatch)
+    public void Draw(SpriteBatch pSpriteBatch)
     {
-        pSpriteBatch.DrawCentered(BaseTexture, Position, Color.White);
+        pSpriteBatch.Draw(BaseTexture, Position, Source, Color, Rotation, Origin, Size, Effects, Layer);
     }
 }

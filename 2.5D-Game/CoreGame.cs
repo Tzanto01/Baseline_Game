@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using Tetris;
 using Utils.Handlers;
 using Utils.Managers;
@@ -28,8 +29,13 @@ namespace Core
             _loadContentHandler = new LoadContentHandler();
 
             GraphicsManager.SetGraphics(_graphics);
+            WindowManager.SetWindow(Window);
             TextureManager.SetContent(Content);
-            GameManager.SetGameType(typeof(TetrisGame));
+            bool result = GameManager.SetGameType(typeof(TetrisGame));
+            if (!result)
+            {
+                Environment.Exit(0);
+            }
 
             Localization.LoadLocalization();
         }
@@ -67,7 +73,5 @@ namespace Core
 
             base.Draw(pGameTime);
         }
-
-        public GraphicsDeviceManager GetGraphics() => _graphics;
     }
 }

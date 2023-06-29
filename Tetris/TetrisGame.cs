@@ -1,9 +1,10 @@
-﻿using Utils.GameObjects;
-using Utils.Interfaces;
+﻿using Utils.Attributes;
+using Utils.GameObjects;
 
 namespace Tetris;
 
-public class TetrisGame : IGame
+[Game]
+public class TetrisGame
 {
     public TetrisGame()
     {

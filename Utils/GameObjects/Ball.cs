@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System.Drawing;
 using Utils.Interfaces;
+using Utils.Managers;
 
 namespace Utils.GameObjects;
 
@@ -15,7 +15,7 @@ public class Ball : GameObject, ILoadDrawAndUpdate
 
     public void Draw(GameTime pGameTime, SpriteBatch pSpriteBatch)
     {
-        pSpriteBatch.DrawCentered(BaseTexture, Position, Color.White);
+        Draw(pSpriteBatch);
     }
 
     public void LoadContent()
@@ -25,6 +25,6 @@ public class Ball : GameObject, ILoadDrawAndUpdate
 
     public void Update(GameTime pGameTime)
     {
-        MovingHelper.Move(this, pGameTime, pParentSize: new Size(Graphics.PreferredBackBufferWidth, Graphics.PreferredBackBufferHeight));
+        MovingHelper.Move(this, pGameTime, pParentSize: WindowManager.GetWindowBounds());
     }
 }

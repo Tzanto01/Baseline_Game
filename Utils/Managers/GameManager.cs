@@ -1,5 +1,5 @@
 ﻿using System;
-using Utils.Interfaces;
+using Utils.Attributes;
 
 namespace Utils.Managers
 {
@@ -7,12 +7,17 @@ namespace Utils.Managers
     {
         private static Type _currentGameType;
 
-        public static void SetGameType(Type pGameType)
+        public static bool SetGameType(Type pGameType)
         {
+            if (Attribute.GetCustomAttribute(pGameType, typeof(GameAttribute)) is null)
+            {
+                return false;
+            }
             _currentGameType = pGameType;
+            return true;
         }
 
-        public static IGame InitializeCurrentGame()
-            => Activator.CreateInstance(_currentGameType) as IGame;
+        public static object InitializeCurrentGame()
+            => Activator.CreateInstance(_currentGameType);
     }
 }
