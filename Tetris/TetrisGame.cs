@@ -1,5 +1,6 @@
-﻿using Utils.Attributes;
-using Utils.GameObjects;
+﻿using Microsoft.Xna.Framework;
+using Utils.Attributes;
+using Utils.SharedObjects;
 
 namespace Tetris;
 
@@ -13,6 +14,10 @@ public class TetrisGame
 
     public void Initizalize()
     {
-        var rectangle = new Rectangle();
+        var textObject = new TextBox()
+        {
+            Color = Color.Black
+        };
+        textObject.SetText("BeepBoop");
     }
 }

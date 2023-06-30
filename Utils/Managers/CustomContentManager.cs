@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Utils.Managers;
 
-public static class TextureManager
+public static class CustomContentManager
 {
     private static ContentManager _Content;
     public static void SetContent(ContentManager pContent)
@@ -22,4 +22,7 @@ public static class TextureManager
 
     public static T LoadTexture<T>(string pTextureName) where T : Texture
         => _Content.Load<T>(pTextureName);
+
+    public static SpriteFont LoadSpriteFont(string pFontName)
+        => _Content.Load<SpriteFont>(APPLICATIONFONTFOLDER + pFontName);
 }

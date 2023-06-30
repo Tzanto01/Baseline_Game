@@ -7,7 +7,7 @@ using Utils.MovingLogic;
 
 namespace Utils.GameObjects;
 
-public class GameObject
+public abstract class GameObject
 {
     public Vector2 Position = Vector2.Zero;
     public Vector2 Origin = Vector2.Zero;
@@ -49,7 +49,7 @@ public class GameObject
 
     public static Texture2D LoadTexture(string pTextureName)
     {
-        return TextureManager.LoadTexture<Texture2D>(pTextureName);
+        return CustomContentManager.LoadTexture<Texture2D>(pTextureName);
     }
 
     public void Draw(SpriteBatch pSpriteBatch)

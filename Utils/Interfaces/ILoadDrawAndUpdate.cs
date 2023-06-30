@@ -1,3 +1,3 @@
 ﻿namespace Utils.Interfaces;
 
-public interface ILoadDrawAndUpdate : ILoadContent, IUpdate, IDraw { }
+public interface ILoadDrawAndUpdate : ILoadContent, IDraw, IUpdate { }

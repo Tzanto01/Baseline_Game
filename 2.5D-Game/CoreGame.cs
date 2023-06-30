@@ -30,7 +30,7 @@ namespace Core
 
             GraphicsManager.SetGraphics(_graphics);
             WindowManager.SetWindow(Window);
-            TextureManager.SetContent(Content);
+            CustomContentManager.SetContent(Content);
             bool result = GameManager.SetGameType(typeof(TetrisGame));
             if (!result)
             {
