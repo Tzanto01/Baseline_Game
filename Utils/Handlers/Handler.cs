@@ -6,7 +6,7 @@ namespace Utils.Handlers;
 
 public abstract class Handler<T>
 {
-    public static readonly List<T> Objects = new();
+    protected static readonly List<T> Objects = new();
 
     public abstract void Handle(GameTime pGameTime = null, SpriteBatch pSpriteBatch = null);
 

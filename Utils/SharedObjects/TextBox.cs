@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Objects;
+using Objects.SharedObjects;
 using Utils.Interfaces;
 
 namespace Utils.SharedObjects

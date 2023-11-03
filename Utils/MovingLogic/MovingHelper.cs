@@ -1,6 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Diagnostics;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using Utils.GameObjects;
+using Utils.SharedObjects;
 using Utils.Managers;
 using Rectangle = Microsoft.Xna.Framework.Rectangle;
 
@@ -8,55 +10,78 @@ namespace Utils.MovingLogic;
 
 public class MovingHelper
 {
+    private Stopwatch _instantMoveSw = new();
+    private readonly bool _canPlayerMove;
     public bool ConfineToParentBounds { get; set; } = true;
-    // ToDo: Implement Parent-Size
-    public void Move(GameObject pObject, GameTime pGameTime, MovingDirection pDirection = MovingDirection.All, float pObjectSpeed = float.NaN, Rectangle pParentSize = new Rectangle())
+
+    public MovingHelper(bool pCanPlayerMove)
     {
-        if (pDirection == MovingDirection.None)
+        _canPlayerMove = pCanPlayerMove;
+    }
+
+    public MovingHelper()
+    {
+        _canPlayerMove = false;
+    }
+    
+    public void PlayerMove(GameObject pObject, GameTime pGameTime, MovingDirection pDirection = MovingDirection.All, float pObjectSpeed = float.NaN, Rectangle pParentSize = new())
+    {
+        if (pDirection == MovingDirection.None || !_canPlayerMove)
             return;
 
-        var kstate = Keyboard.GetState();
+        var kState = Keyboard.GetState();
         var speed = float.IsNaN(pObjectSpeed) ? pObject.Speed : pObjectSpeed;
         var canMoveAll = (pDirection & MovingDirection.All) == MovingDirection.All;
         var parentBounds = pParentSize == default ? WindowManager.GetWindowBounds() : pParentSize;
 
-        if (kstate.IsKeyDown(Keys.Up) && (canMoveAll || (pDirection & MovingDirection.Up) == MovingDirection.Up))
+        if (kState.IsKeyDown(Keys.Up) && (canMoveAll || (pDirection & MovingDirection.Up) == MovingDirection.Up))
             pObject.Position.Y -= speed * (float)pGameTime.ElapsedGameTime.TotalSeconds;
 
-        if (kstate.IsKeyDown(Keys.Down) && (canMoveAll || (pDirection & MovingDirection.Down) == MovingDirection.Down))
+        if (kState.IsKeyDown(Keys.Down) && (canMoveAll || (pDirection & MovingDirection.Down) == MovingDirection.Down))
             pObject.Position.Y += speed * (float)pGameTime.ElapsedGameTime.TotalSeconds;
 
-        if (kstate.IsKeyDown(Keys.Left) && (canMoveAll || (pDirection & MovingDirection.Left) == MovingDirection.Left))
+        if (kState.IsKeyDown(Keys.Left) && (canMoveAll || (pDirection & MovingDirection.Left) == MovingDirection.Left))
             pObject.Position.X -= speed * (float)pGameTime.ElapsedGameTime.TotalSeconds;
 
-        if (kstate.IsKeyDown(Keys.Right) && (canMoveAll || (pDirection & MovingDirection.Right) == MovingDirection.Right))
+        if (kState.IsKeyDown(Keys.Right) && (canMoveAll || (pDirection & MovingDirection.Right) == MovingDirection.Right))
             pObject.Position.X += speed * (float)pGameTime.ElapsedGameTime.TotalSeconds;
 
         CheckParentSize(pObject, parentBounds);
     }
 
-    public void MoveInstant(GameObject pObject, float pMovingDistance, MovingDirection pDirection = MovingDirection.All, Rectangle pParentSize = new Rectangle())
+    public void PlayerMoveInstant(GameObject pObject, float pMovingDistance, int pMovingTime = 200, MovingDirection pDirection = MovingDirection.All, Rectangle pParentSize = new Rectangle())
     {
-        if (pDirection == MovingDirection.None)
+        if (pDirection == MovingDirection.None || !_canPlayerMove)
             return;
+        
+        switch (_instantMoveSw.IsRunning)
+        {
+            case true when _instantMoveSw.ElapsedMilliseconds < pMovingTime:
+                return;
+            case true:
+                _instantMoveSw.Stop();
+                _instantMoveSw = new Stopwatch();
+                break;
+        }
 
-        var kstate = Keyboard.GetState();
+        var kState = Keyboard.GetState();
         var canMoveAll = (pDirection & MovingDirection.All) == MovingDirection.All;
         var size = pParentSize == default ? WindowManager.GetWindowBounds() : pParentSize;
 
-        if (kstate.IsKeyDown(Keys.Up) && (canMoveAll || (pDirection & MovingDirection.Up) == MovingDirection.Up))
+        if (kState.IsKeyDown(Keys.Up) && (canMoveAll || (pDirection & MovingDirection.Up) == MovingDirection.Up))
             pObject.Position.Y -= pMovingDistance;
 
-        if (kstate.IsKeyDown(Keys.Down) && (canMoveAll || (pDirection & MovingDirection.Down) == MovingDirection.Down))
+        if (kState.IsKeyDown(Keys.Down) && (canMoveAll || (pDirection & MovingDirection.Down) == MovingDirection.Down))
             pObject.Position.Y += pMovingDistance;
 
-        if (kstate.IsKeyDown(Keys.Left) && (canMoveAll || (pDirection & MovingDirection.Left) == MovingDirection.Left))
+        if (kState.IsKeyDown(Keys.Left) && (canMoveAll || (pDirection & MovingDirection.Left) == MovingDirection.Left))
             pObject.Position.X -= pMovingDistance;
 
-        if (kstate.IsKeyDown(Keys.Right) && (canMoveAll || (pDirection & MovingDirection.Right) == MovingDirection.Right))
+        if (kState.IsKeyDown(Keys.Right) && (canMoveAll || (pDirection & MovingDirection.Right) == MovingDirection.Right))
             pObject.Position.X += pMovingDistance;
 
         CheckParentSize(pObject, size);
+        _instantMoveSw.Start();
     }
 
     private void CheckParentSize(GameObject pObject, Rectangle pParentSize)

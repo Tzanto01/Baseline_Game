@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Utils.Interfaces;
 
-namespace Utils.GameObjects;
+namespace Utils.SharedObjects;
 
 public class Rectangle : GameObject, ILoadDrawAndUpdate
 {
@@ -17,7 +17,7 @@ public class Rectangle : GameObject, ILoadDrawAndUpdate
 
     public void Update(GameTime pGameTime)
     {
-        MovingHelper.Move(this, pGameTime);
+        MovingHelper.PlayerMoveInstant(this, 50);
     }
 
     public void Draw(GameTime pGameTime, SpriteBatch pSpriteBatch)

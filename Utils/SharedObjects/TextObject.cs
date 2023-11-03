@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using Utils.GameObjects;
 using Utils.Managers;
+using Utils.SharedObjects;
 
-namespace Objects
+namespace Objects.SharedObjects
 {
     public abstract class TextObject : GameObject
     {
@@ -10,10 +10,7 @@ namespace Objects
         private SpriteFont _currentFont;
         public SpriteFont CurrentFont
         {
-            get
-            {
-                return _currentFont;
-            }
+            get => _currentFont;
             internal set
             {
                 _currentFont = value;

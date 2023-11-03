@@ -5,7 +5,7 @@ using Utils.Interfaces;
 using Utils.Managers;
 using Utils.MovingLogic;
 
-namespace Utils.GameObjects;
+namespace Utils.SharedObjects;
 
 public abstract class GameObject
 {
@@ -18,6 +18,7 @@ public abstract class GameObject
     public float Rotation = 0;
     public SpriteEffects Effects = SpriteEffects.None;
     public float Layer = 0;
+    public bool CanPlayerMove { get; init; } = false;
 
     public float Height => BaseTexture.Height * Size;
     public float Width => BaseTexture.Width * Size;
@@ -31,7 +32,7 @@ public abstract class GameObject
 
     public GameObject()
     {
-        MovingHelper = new MovingHelper();
+        MovingHelper = new MovingHelper(CanPlayerMove);
 
         if (this is IUpdate updatingObject)
             UpdateHandler.Add(updatingObject);

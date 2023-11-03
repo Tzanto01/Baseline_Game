@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Utils.Interfaces;
 using Utils.Managers;
 
-namespace Utils.GameObjects;
+namespace Utils.SharedObjects;
 
 public class Ball : GameObject, ILoadDrawAndUpdate
 {
@@ -25,6 +25,6 @@ public class Ball : GameObject, ILoadDrawAndUpdate
 
     public void Update(GameTime pGameTime)
     {
-        MovingHelper.Move(this, pGameTime, pParentSize: WindowManager.GetWindowBounds());
+        MovingHelper.PlayerMove(this, pGameTime, pParentSize: WindowManager.GetWindowBounds());
     }
 }

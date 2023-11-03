@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Utils.Attributes;
-using Utils.SharedObjects;
+using Rectangle = Utils.SharedObjects.Rectangle;
 
 namespace Tetris;
 
@@ -9,15 +9,15 @@ public class TetrisGame
 {
     public TetrisGame()
     {
-        Initizalize();
+        Initialize();
     }
 
-    public void Initizalize()
+    public void Initialize()
     {
-        var textObject = new TextBox()
+        var rectangle = new Rectangle
         {
-            Color = Color.Black
+            Color = Color.Black,
+            CanPlayerMove = false
         };
-        textObject.SetText("BeepBoop");
     }
 }
