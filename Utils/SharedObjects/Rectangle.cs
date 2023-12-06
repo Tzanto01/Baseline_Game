@@ -6,6 +6,10 @@ namespace Utils.SharedObjects;
 
 public class Rectangle : GameObject, ILoadDrawAndUpdate
 {
+    public Rectangle(bool canPlayerMove = false) : base(canPlayerMove)
+    {
+    }
+
     public void LoadContent()
     {
         BaseTexture = LoadTexture("rectangle");
@@ -17,7 +21,7 @@ public class Rectangle : GameObject, ILoadDrawAndUpdate
 
     public void Update(GameTime pGameTime)
     {
-        MovingHelper.PlayerMoveInstant(this, 50);
+        MovingHelper.PlayerMoveInstant(50);
     }
 
     public void Draw(GameTime pGameTime, SpriteBatch pSpriteBatch)

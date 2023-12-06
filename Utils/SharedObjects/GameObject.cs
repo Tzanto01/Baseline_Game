@@ -19,7 +19,6 @@ public abstract class GameObject
     public SpriteEffects Effects = SpriteEffects.None;
     public float Layer = 0;
     public bool CanPlayerMove { get; init; } = false;
-
     public float Height => BaseTexture.Height * Size;
     public float Width => BaseTexture.Width * Size;
 
@@ -30,10 +29,10 @@ public abstract class GameObject
         get => GraphicsManager.GetGraphics();
     }
 
-    public GameObject()
-    {
-        MovingHelper = new MovingHelper(CanPlayerMove);
-
+    public GameObject(bool canPlayerMove = false) {
+        CanPlayerMove = canPlayerMove;
+        MovingHelper = new MovingHelper(this, CanPlayerMove);
+        
         if (this is IUpdate updatingObject)
             UpdateHandler.Add(updatingObject);
         if (this is IDraw drawingObject)

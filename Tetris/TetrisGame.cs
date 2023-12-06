@@ -14,10 +14,10 @@ public class TetrisGame
 
     public void Initialize()
     {
-        var rectangle = new Rectangle
+        var rectangle = new Rectangle(true)
         {
             Color = Color.Black,
-            CanPlayerMove = false
+            CanPlayerMove = true
         };
     }
 }

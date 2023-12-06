@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Core Launch (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/2.5D-Game/bin/Debug/net6.0-windows/Core.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Core",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        }
+    ]
+}

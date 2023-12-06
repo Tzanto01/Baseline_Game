@@ -25,6 +25,6 @@ public class Ball : GameObject, ILoadDrawAndUpdate
 
     public void Update(GameTime pGameTime)
     {
-        MovingHelper.PlayerMove(this, pGameTime, pParentSize: WindowManager.GetWindowBounds());
+        MovingHelper.PlayerMove(pGameTime, pParentSize: WindowManager.GetWindowBounds());
     }
 }
