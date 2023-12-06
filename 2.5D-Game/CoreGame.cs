@@ -43,7 +43,7 @@ namespace Core
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            var game = GameManager.InitializeCurrentGame();
+            GameManager.InitializeCurrentGame();
             base.Initialize();
         }
 
